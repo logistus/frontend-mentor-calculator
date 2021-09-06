@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link rel="stylesheet" href="theme1.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Frontend Mentor | Calculator app</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator-main">
+        <div class="calculator-header">
+          <div>calc</div>
+          <div class="theme">
+            <div>THEME</div>
+            <div>
+              <div class="theme-options">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+              </div>
+              <div class="theme-selector">
+                <div class="theme-selector-knob"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="calculator-screen"></div>
+        <div class="calculator-keys">
+          <div class="key" id="7">7</div>
+          <div class="key" id="8">8</div>
+          <div class="key" id="9">9</div>
+          <div class="key del" id="del">DEL</div>
+          <div class="key" id="4">4</div>
+          <div class="key" id="5">5</div>
+          <div class="key" id="6">6</div>
+          <div class="key" id="+">+</div>
+          <div class="key" id="1">1</div>
+          <div class="key" id="2">2</div>
+          <div class="key" id="3">3</div>
+          <div class="key" id="-">-</div>
+          <div class="key" id=".">.</div>
+          <div class="key" id="0">0</div>
+          <div class="key" id="/">/</div>
+          <div class="key" id="x">x</div>
+          <div class="key reset" id="reset">RESET</div>
+          <div class="key equals" id="=">=</div>
+        </div>
+      </div>
+      <footer class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by
+        <a href="https://github.com/logistus" target="_blank" rel="noreferrer"
+          >Sinan YILMAZ</a
+        >.
+      </footer>
+    </div>
+    <script>
+      let keys = document.querySelectorAll(".key");
+      let screen = document.querySelector(".calculator-screen");
+      let theme_selector = document.querySelector(".theme-selector");
+      let theme_selector_knob = document.querySelector(".theme-selector-knob");
+
+      function moveKnob() {
+        let selected_theme = localStorage.getItem("theme") || 1;
+        if (selected_theme === "1") {
+          theme_selector_knob.style.marginLeft = 0;
+        } else if (selected_theme === "2") {
+          theme_selector_knob.style.marginLeft = "22.5px";
+        } else {
+          theme_selector_knob.style.marginLeft = "45px";
+        }
+      }
+
+      function setKnob() {
+        let selected_theme = localStorage.getItem("theme") || 1;
+        if (selected_theme === "1") {
+          localStorage.setItem("theme", "2");
+          document
+            .querySelector("[rel='stylesheet']")
+            .setAttribute("href", "theme2.css");
+        } else if (selected_theme === "2") {
+          localStorage.setItem("theme", "3");
+          document
+            .querySelector("[rel='stylesheet']")
+            .setAttribute("href", "theme3.css");
+        } else {
+          localStorage.setItem("theme", "1");
+          document
+            .querySelector("[rel='stylesheet']")
+            .setAttribute("href", "theme1.css");
+        }
+      }
+
+      function changeCss() {
+        let selected_theme = localStorage.getItem("theme") || 1;
+        if (selected_theme === "1") {
+          document
+            .querySelector("[rel='stylesheet']")
+            .setAttribute("href", "theme1.css");
+        } else if (selected_theme === "2") {
+          document
+            .querySelector("[rel='stylesheet']")
+            .setAttribute("href", "theme2.css");
+        } else {
+          document
+            .querySelector("[rel='stylesheet']")
+            .setAttribute("href", "theme3.css");
+        }
+      }
+
+      moveKnob();
+      changeCss();
+
+      keys.forEach((key) => {
+        let id = key.getAttribute("id");
+        key.addEventListener(
+          "click",
+          function () {
+            keyPressed(id);
+          },
+          false
+        );
+      });
+
+      theme_selector.addEventListener("click", function () {
+        setKnob();
+        moveKnob();
+      });
+
+      function keyPressed(val) {
+        switch (val) {
+          case "0":
+          case "1":
+          case "2":
+          case "3":
+          case "4":
+          case "5":
+          case "6":
+          case "7":
+          case "8":
+          case "9":
+            screen.innerHTML += val * 1;
+            break;
+          case "reset":
+            screen.innerHTML = "";
+            break;
+          case "del":
+            if (screen.innerHTML != "" || screen.innerHTML != "0") {
+              if (screen.innerHTML.split("").length > 1) {
+                screen.innerHTML = screen.innerHTML.slice(0, -1);
+              } else {
+                screen.innerHTML = "";
+              }
+            }
+            break;
+          case "x":
+            if (screen.innerHTML !== "") {
+              screen.innerHTML += "x";
+            }
+            break;
+          case "+":
+            if (screen.innerHTML !== "") {
+              screen.innerHTML += "+";
+            }
+            break;
+          case "-":
+            if (screen.innerHTML !== "") {
+              screen.innerHTML += "-";
+            }
+            break;
+          case ".":
+            screen.innerHTML += ".";
+            break;
+          case "/":
+            if (screen.innerHTML !== "") {
+              screen.innerHTML += "/";
+            }
+            break;
+          case "=":
+            if (screen.innerHTML != "") {
+              let numbers = screen.innerHTML.split(/\+|\-|\x|\//g);
+              let operators = screen.innerHTML
+                .replace(/[0-9]|\./g, "")
+                .split("");
+
+              //check for divisions
+              let divide = operators.indexOf("/");
+              while (divide != -1) {
+                numbers.splice(
+                  divide,
+                  2,
+                  parseFloat(numbers[divide]) / parseFloat(numbers[divide + 1])
+                );
+                operators.splice(divide, 1);
+                divide = operators.indexOf("/");
+              }
+              // check for multiplications
+              let multiply = operators.indexOf("x");
+              while (multiply != -1) {
+                numbers.splice(
+                  multiply,
+                  2,
+                  numbers[multiply] * numbers[multiply + 1]
+                );
+                operators.splice(multiply, 1);
+                multiply = operators.indexOf("x");
+              }
+              // check for additions
+              let add = operators.indexOf("+");
+              while (add != -1) {
+                numbers.splice(
+                  add,
+                  2,
+                  parseFloat(numbers[add]) + parseFloat(numbers[add + 1])
+                );
+                operators.splice(add, 1);
+                add = operators.indexOf("+");
+              }
+              // check for substractions
+              let substract = operators.indexOf("-");
+              while (substract != -1) {
+                numbers.splice(
+                  substract,
+                  2,
+                  parseFloat(numbers[substract]) -
+                    parseFloat(numbers[substract + 1])
+                );
+                operators.splice(substract, 1);
+                substract = operators.indexOf("-");
+              }
+              //and result
+              screen.innerHTML = numbers[0];
+            } else {
+              screen.innerHTML = "";
+            }
+            break;
+          default:
+            alert("Invalid input!");
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>

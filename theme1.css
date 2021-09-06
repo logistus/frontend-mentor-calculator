@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Spartan", sans-serif;
+  font-size: 32px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  background-color: #3a4764;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.calculator-main {
+  max-width: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.calculator-main .calculator-header {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+.calculator-main .calculator-header .theme {
+  font-size: 0.5em;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+.calculator-main .calculator-header .theme .theme-options {
+  display: flex;
+  justify-content: space-around;
+}
+.calculator-main .calculator-header .theme .theme-selector {
+  background-color: #232c43;
+  border-radius: 10px;
+  width: 70px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.calculator-main .calculator-header .theme .theme-selector:hover {
+  cursor: pointer;
+}
+.calculator-main .calculator-header .theme .theme-selector .theme-selector-knob {
+  background-color: #d03f2f;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  transition: 5ms;
+}
+.calculator-main .calculator-screen {
+  background-color: #182034;
+  color: white;
+  border: 30px solid #182034;
+  border-radius: 10px;
+  text-align: right;
+  font-size: 2em;
+  overflow: hidden;
+  min-height: 136px;
+}
+@media screen and (max-width: 500px) {
+  .calculator-main .calculator-screen {
+    font-size: 1.5em;
+    min-height: 96px;
+    border: 20px solid #182034;
+  }
+}
+.calculator-main .calculator-keys {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(60px, 100px));
+  gap: 25px;
+  background-color: #232c43;
+  border-radius: 10px;
+  padding: 25px;
+  align-items: center;
+}
+@media screen and (max-width: 500px) {
+  .calculator-main .calculator-keys {
+    gap: 15px;
+  }
+}
+.calculator-main .calculator-keys .key {
+  text-align: center;
+  padding: 15px 15px 5px;
+  box-shadow: 0 5px #b4a597;
+}
+.calculator-main .calculator-keys .key:hover {
+  cursor: pointer;
+}
+.calculator-main .calculator-keys .key.reset, .calculator-main .calculator-keys .key.equals {
+  color: white;
+  font-size: 0.6em;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calculator-main .calculator-keys .key.reset, .calculator-main .calculator-keys .key.del {
+  background-color: #637097;
+  box-shadow: 0 5px #404e72;
+  color: white;
+  font-size: 0.6em;
+  padding: 23px 11px 12px;
+}
+.calculator-main .calculator-keys .key.reset {
+  grid-column: 1/span 2;
+}
+.calculator-main .calculator-keys .key.equals {
+  grid-column: 3/span 2;
+  background-color: #d03f2f;
+  box-shadow: 0 5px #93261a;
+}
+.calculator-main .calculator-keys .key {
+  border-radius: 10px;
+  background-color: #eae3dc;
+}
+
+footer {
+  font-size: 0.5em;
+  padding: 20px;
+  color: #637097;
+  text-align: center;
+}
+footer a {
+  color: white;
+}
+
+/*# sourceMappingURL=theme1.css.map */
