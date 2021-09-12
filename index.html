@@ -77,9 +77,9 @@
       let screen = document.querySelector(".calculator-screen");
       let theme_selector = document.querySelector(".theme-selector");
       let theme_selector_knob = document.querySelector(".theme-selector-knob");
+      let selected_theme = localStorage.getItem("theme") || "1";
 
       function moveKnob() {
-        let selected_theme = localStorage.getItem("theme") || 1;
         if (selected_theme === "1") {
           theme_selector_knob.style.marginLeft = 0;
         } else if (selected_theme === "2") {
@@ -90,7 +90,6 @@
       }
 
       function setKnob() {
-        let selected_theme = localStorage.getItem("theme") || 1;
         if (selected_theme === "1") {
           localStorage.setItem("theme", "2");
           document
@@ -110,7 +109,6 @@
       }
 
       function changeCss() {
-        let selected_theme = localStorage.getItem("theme") || 1;
         if (selected_theme === "1") {
           document
             .querySelector("[rel='stylesheet']")
@@ -187,7 +185,14 @@
             }
             break;
           case ".":
-            screen.innerHTML += ".";
+            let numbers = screen.innerHTML.split(/\+|\-|\x|\//g);
+            for (let i = 0; i < numbers.length; i++) {
+              if (numbers[i].indexOf(".") < 0) {
+                if (numbers[i].indexOf(".") != numbers[i].split("").length -1 || numbers[i] === "")
+                  screen.innerHTML += ".";
+                  break;
+              }
+            }
             break;
           case "/":
             if (screen.innerHTML !== "") {
@@ -247,7 +252,7 @@
                 substract = operators.indexOf("-");
               }
               //and result
-              screen.innerHTML = numbers[0];
+              screen.innerHTML = numbers[0].toFixed(7);
             } else {
               screen.innerHTML = "";
             }
