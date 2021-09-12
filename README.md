@@ -13,4 +13,4 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/logistus/frontend-mentor-calculator](https://github.com/logistus/frontend-mentor-calculator)
-- Live Site URL: [https://frontend-mentor-calculator-e58any8xj-logistus.vercel.app/](https://frontend-mentor-calculator-e58any8xj-logistus.vercel.app/)
+- Live Site URL: [https://frontend-mentor-calculator-eight.vercel.app/](https://frontend-mentor-calculator-eight.vercel.app/)
