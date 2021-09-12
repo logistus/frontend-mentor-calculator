@@ -80,6 +80,7 @@
       let selected_theme = localStorage.getItem("theme") || "1";
 
       function moveKnob() {
+        let selected_theme = localStorage.getItem("theme") || "1";
         if (selected_theme === "1") {
           theme_selector_knob.style.marginLeft = 0;
         } else if (selected_theme === "2") {
@@ -90,6 +91,7 @@
       }
 
       function setKnob() {
+        let selected_theme = localStorage.getItem("theme") || "1";
         if (selected_theme === "1") {
           localStorage.setItem("theme", "2");
           document
